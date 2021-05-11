@@ -36,7 +36,7 @@ public class CustomerInfo {
     @Column(name = "contract_end_date")
     private LocalDateTime endDate;
     @Column(name = "contract_status")
-    private String contractStatus;
+    private Integer contractStatus;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
