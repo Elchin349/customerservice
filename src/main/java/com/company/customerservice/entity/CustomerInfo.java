@@ -1,9 +1,12 @@
 package com.company.customerservice.entity;
 
+import com.company.customerservice.enums.ContractStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -57,8 +60,13 @@ public class CustomerInfo {
     private void createDateNow(){
         this.createdDate = LocalDateTime.now();
         this.uniqueId = UUID.randomUUID();
+        this.contractStatus = ContractStatus.ACTIVE.getId();
     }
 
+    @PostUpdate
+    private void updateDate(){
+        this.createdDate = LocalDateTime.now();
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.company.customerservice.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PersonalInfoRequestDto {
 
+    @JsonIgnore
+    private Long id;
     @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
@@ -19,7 +22,7 @@ public class PersonalInfoRequestDto {
     @JsonProperty("patronymic")
     private String patronymic;
     @JsonProperty("birthDate")
-    private long birthDate;
+    private Long birthDate;
     @JsonProperty("finCode")
     private String finCode;
     @JsonProperty("docSerial")
@@ -29,9 +32,9 @@ public class PersonalInfoRequestDto {
     @JsonProperty("martialStatus")
     private String martialStatus;
     @JsonProperty("expireDate")
-    private long expireDate;
+    private Long expireDate;
     @JsonProperty("givenDate")
-    private long givenDate;
+    private Long givenDate;
     @JsonProperty("registrationAddress")
     private String registrationAddress;
 }

@@ -12,18 +12,26 @@ import java.time.ZoneId;
 public class DateMapper {
 
     public LocalDate millisToLocalDate(Long millis) {
-        return LocalDate.ofInstant(Instant.ofEpochMilli(millis), ZoneId.systemDefault());
+        if (millis != null)
+            return LocalDate.ofInstant(Instant.ofEpochMilli(millis), ZoneId.systemDefault());
+        return null;
     }
 
-    public LocalDateTime millisToLocalDateTime(Long millis){
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(millis),ZoneId.systemDefault());
+    public LocalDateTime millisToLocalDateTime(Long millis) {
+        if (millis != null)
+            return LocalDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneId.systemDefault());
+        return null;
     }
 
-    public long localDateToMillis(LocalDate localDate){
-        return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    public Long localDateToMillis(LocalDate localDate) {
+        if (localDate != null)
+            return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        return null;
     }
 
-    public long localDateTimeToMillis(LocalDateTime localDateTime){
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    public Long localDateTimeToMillis(LocalDateTime localDateTime) {
+        if (localDateTime != null)
+            return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        return null;
     }
 }

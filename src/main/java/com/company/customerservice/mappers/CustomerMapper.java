@@ -5,8 +5,11 @@ import com.company.customerservice.dto.response.CustomerInfoDetailResponseDto;
 import com.company.customerservice.dto.response.CustomerInfoResponseDto;
 import com.company.customerservice.entity.CustomerInfo;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValueCheckStrategy;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(uses = DateMapper.class)
+@Mapper(uses = DateMapper.class, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CustomerMapper {
 
     CustomerInfo toCustomerInfo(CustomerInfoRequestDto requestDto);
@@ -14,5 +17,6 @@ public interface CustomerMapper {
     CustomerInfoDetailResponseDto toResponseDetailDto(CustomerInfo customerInfo);
 
     CustomerInfoResponseDto toResponse(CustomerInfo customerInfo);
+
 
 }

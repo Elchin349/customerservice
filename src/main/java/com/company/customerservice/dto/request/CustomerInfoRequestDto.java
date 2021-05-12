@@ -1,5 +1,6 @@
 package com.company.customerservice.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CustomerInfoRequestDto {
 
+    @JsonIgnore
+    private Long id;
     @JsonProperty("workPlace")
     private String workPlace;
     @JsonProperty("position")
@@ -21,9 +24,9 @@ public class CustomerInfoRequestDto {
     @JsonProperty("contractNumber")
     private String contractNumber;
     @JsonProperty("beginDate")
-    private long beginDate;
+    private Long beginDate;
     @JsonProperty("endDate")
-    private long endDate;
+    private Long endDate;
     @JsonProperty("contractStatus")
     private Integer contractStatus;
     @JsonProperty("securityNumber")
