@@ -2,6 +2,7 @@ package com.company.customerservice.controller;
 
 import com.company.customerservice.dto.request.CustomerInfoRequestDto;
 import com.company.customerservice.dto.response.CustomerInfoDetailResponseDto;
+import com.company.customerservice.dto.response.CustomerInfoResponseDto;
 import com.company.customerservice.service.CustomerInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,19 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerInfoDetailResponseDto>> findAllDetail(){
-        return new ResponseEntity<>(customerInfoService.findAllDetail(),HttpStatus.OK);
+    public ResponseEntity<List<CustomerInfoDetailResponseDto>> findAllDetail(@RequestParam(name = "pageNumber",required = false,defaultValue = "0") Integer pageNumber,
+                                                                             @RequestParam(name = "pageSize",required = false,defaultValue = "10") Integer pageSize,
+                                                                             @RequestParam(name = "status",required = false)Integer contractStatus,
+                                                                             @RequestParam(name = "salary",required = false)Double salary
+    ){
+        return new ResponseEntity<>(customerInfoService.findAllDetail(pageNumber, pageSize, contractStatus,salary),HttpStatus.OK);
     }
+//
+//    @GetMapping("/detail")
+//    public ResponseEntity<List<CustomerInfoResponseDto>> findAll(){
+//        return new ResponseEntity<>(customerInfoService.findAll(),HttpStatus.OK);
+//    }
+
+
+
 }

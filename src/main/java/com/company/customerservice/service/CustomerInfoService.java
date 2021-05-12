@@ -10,7 +10,10 @@ public interface CustomerInfoService {
 
     CustomerInfoDetailResponseDto findById(Long id);
 
-    List<CustomerInfoDetailResponseDto> findAllDetail();
+    List<CustomerInfoDetailResponseDto> findAllDetail(Integer pageNumber,Integer pageSize,Integer status,Double salary);
 
     CustomerInfoDetailResponseDto saveCustomer(CustomerInfoRequestDto requestDto);
+
+    //List<CustomerInfoResponseDto> findAll();
 }
+
