@@ -21,8 +21,12 @@ ext {
     mapstructVersion = "1.4.2.Final"
     lombokVersion = "1.18.16"
     lombokMapstructBindingVersion = "0.2.0"
+    swaggerVersion = '2.9.2'
 }
 dependencies {
+    implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+
     implementation "org.mapstruct:mapstruct:${mapstructVersion}", "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}", "org.projectlombok:lombok:${lombokVersion}", "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * http://localhost:9090/swagger-ui.html#/  for swagger use this url
+ */
 @CrossSafeRestResource(path = "/api")
 @RequiredArgsConstructor
 public class CustomerController implements ApiBuilder {
