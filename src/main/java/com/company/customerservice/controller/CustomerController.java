@@ -1,5 +1,6 @@
 package com.company.customerservice.controller;
 
+import com.company.customerservice.container.CrossSafeRestResource;
 import com.company.customerservice.container.api.ApiBuilder;
 import com.company.customerservice.container.api.CollectionMessage;
 import com.company.customerservice.container.api.SingleMessage;
@@ -15,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api")
+@CrossSafeRestResource(path = "/api")
 @RequiredArgsConstructor
 public class CustomerController implements ApiBuilder {
 
