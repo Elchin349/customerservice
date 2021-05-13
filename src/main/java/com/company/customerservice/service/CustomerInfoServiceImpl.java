@@ -3,12 +3,16 @@ package com.company.customerservice.service;
 import com.company.customerservice.dto.request.CustomerInfoRequestDto;
 import com.company.customerservice.dto.response.CustomerInfoDetailResponseDto;
 import com.company.customerservice.dto.response.CustomerInfoResponseDto;
+import com.company.customerservice.dto.response.CustomerPageList;
 import com.company.customerservice.entity.CustomerInfo;
+import com.company.customerservice.enums.BusinessStatus;
+import com.company.customerservice.exceptions.NotFoundException;
 import com.company.customerservice.mappers.CustomerMapper;
 import com.company.customerservice.mappers.CustomerUpdateMapper;
 import com.company.customerservice.mappers.DateMapper;
 import com.company.customerservice.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +31,28 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
     @Override
     public CustomerInfoDetailResponseDto findById(Long id) {
-        return customerMapper.toResponseDetailDto(customerRepository.findById(id).get());
+        Optional<CustomerInfo> customerInfo = customerRepository.findById(id);
+        if (customerInfo.isPresent())
+            return customerMapper.toResponseDetailDto(customerInfo.get());
+        throw new NotFoundException(BusinessStatus.CUSTOMER_INFO_BY_ID_NOT_FOUND);
     }
 
     @Override
-    public List<CustomerInfoDetailResponseDto> findAllDetail(Integer pageNumber, Integer pageSize, Integer status, Double minSalary, Double maxSalary) {
+    public CustomerPageList findAllDetail(Integer pageNumber, Integer pageSize, Integer status, Double minSalary, Double maxSalary) {
+        CustomerPageList customerPageList;
+        Page<CustomerInfo> customerInfoPage;
         if (status != null) {
-            findAllByContractStatus(pageNumber, pageSize, status);
+            customerInfoPage = customerRepository.findAllByContractStatusAndSalaryGreaterThanEqualAndSalaryLessThanEqual(status, PageRequest.of(pageNumber, pageSize), minSalary, maxSalary);
+        } else {
+            customerInfoPage = customerRepository.findAllBySalaryGreaterThanEqualAndSalaryLessThanEqual(PageRequest.of(pageNumber, pageSize), minSalary, maxSalary);
         }
-        return findAll(pageNumber, pageSize, minSalary, maxSalary);
+        customerPageList = new CustomerPageList(customerInfoPage.getContent()
+                .stream()
+                .map(customerMapper::toResponseDetailDto)
+                .collect(Collectors.toList()),
+                customerInfoPage.getTotalPages(),
+                customerInfoPage.getTotalElements());
+        return customerPageList;
     }
 
     @Override
@@ -54,28 +71,12 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     @Override
     public CustomerInfoDetailResponseDto update(Long id, CustomerInfoRequestDto requestDto) {
         Optional<CustomerInfo> customerInfo = customerRepository.findById(id);
-        if(customerInfo.isPresent()){
-            CustomerInfo customerInfoDb = customerUpdateMapper.toUpdateCustomer(requestDto,customerInfo.get());
+        if (customerInfo.isPresent()) {
+            CustomerInfo customerInfoDb = customerUpdateMapper.toUpdateCustomer(requestDto, customerInfo.get());
             customerRepository.save(customerInfoDb);
             return customerMapper.toResponseDetailDto(customerInfoDb);
         }
-        return null; // exeption atilacaq
-    }
-
-    private List<CustomerInfoDetailResponseDto> findAllByContractStatus(Integer pageNumber, Integer pageSize, Integer status) {
-        return customerRepository.findAllByContractStatus(status, PageRequest.of(pageNumber, pageSize))
-                .stream()
-                .map(customerMapper::toResponseDetailDto)
-                .collect(Collectors.toList());
-
-    }
-
-    private List<CustomerInfoDetailResponseDto> findAll(Integer pageNumber, Integer pageSize, Double minSalary, Double maxSalary) {
-        return customerRepository.findAllBySalaryGreaterThanEqualAndSalaryLessThanEqual(PageRequest.of(pageNumber, pageSize), minSalary, maxSalary)
-                .stream()
-                .map(customerMapper::toResponseDetailDto)
-                .collect(Collectors.toList());
-
+        throw new NotFoundException(BusinessStatus.CUSTOMER_INFO_BY_ID_NOT_FOUND);
     }
 
 }

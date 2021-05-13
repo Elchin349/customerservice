@@ -43,8 +43,6 @@ public class CustomerInfo {
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-    @Column(name = "security_number")
-    private String securityNumber;
 
     @OneToOne(cascade =CascadeType.ALL)
     @JoinColumn(name = "customer_personal_id",referencedColumnName = "id",
@@ -67,8 +65,6 @@ public class CustomerInfo {
     private void updateDate(){
         this.createdDate = LocalDateTime.now();
     }
-
-
 
 
 

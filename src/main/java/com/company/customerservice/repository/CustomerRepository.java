@@ -15,5 +15,5 @@ public interface CustomerRepository extends JpaRepository<CustomerInfo,Long> {
 
     Page<CustomerInfo> findAllBySalaryGreaterThanEqualAndSalaryLessThanEqual(Pageable pageable,Double minSalary,Double maxSalary);
 
-    Page<CustomerInfo>findAllByContractStatus(Integer status,Pageable pageable);
+    Page<CustomerInfo>findAllByContractStatusAndSalaryGreaterThanEqualAndSalaryLessThanEqual(Integer status,Pageable pageable,Double minSalary,Double maxSalary);
 }

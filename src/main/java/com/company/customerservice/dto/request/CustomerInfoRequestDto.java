@@ -29,8 +29,6 @@ public class CustomerInfoRequestDto {
     private Long endDate;
     @JsonProperty("contractStatus")
     private Integer contractStatus;
-    @JsonProperty("securityNumber")
-    private String securityNumber;
 
     @JsonProperty("personalInfo")
     private PersonalInfoRequestDto personalInfo;

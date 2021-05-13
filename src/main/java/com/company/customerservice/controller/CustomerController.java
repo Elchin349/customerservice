@@ -1,8 +1,12 @@
 package com.company.customerservice.controller;
 
+import com.company.customerservice.container.api.ApiBuilder;
+import com.company.customerservice.container.api.CollectionMessage;
+import com.company.customerservice.container.api.SingleMessage;
 import com.company.customerservice.dto.request.CustomerInfoRequestDto;
 import com.company.customerservice.dto.response.CustomerInfoDetailResponseDto;
 import com.company.customerservice.dto.response.CustomerInfoResponseDto;
+import com.company.customerservice.dto.response.CustomerPageList;
 import com.company.customerservice.service.CustomerInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,39 +18,39 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class CustomerController {
+public class CustomerController implements ApiBuilder {
 
     private final CustomerInfoService customerInfoService;
 
     @PostMapping
-    public ResponseEntity<CustomerInfoDetailResponseDto> save(@RequestBody CustomerInfoRequestDto customerInfoRequestDto) {
-        return new ResponseEntity<>(customerInfoService.saveCustomer(customerInfoRequestDto), HttpStatus.CREATED);
+    public ResponseEntity<SingleMessage<CustomerInfoDetailResponseDto>> save(@RequestBody CustomerInfoRequestDto customerInfoRequestDto) {
+        return ResponseEntity.ok(generateSingleMessage(customerInfoService.saveCustomer(customerInfoRequestDto)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerInfoDetailResponseDto> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(customerInfoService.findById(id), HttpStatus.OK);
+    public ResponseEntity<SingleMessage<CustomerInfoDetailResponseDto>> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(generateSingleMessage(customerInfoService.findById(id)));
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<List<CustomerInfoDetailResponseDto>> findAllDetail(@RequestParam(name = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-                                                                             @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
-                                                                             @RequestParam(name = "status", required = false) Integer contractStatus,
-                                                                             @RequestParam(name = "minSalary", required = false, defaultValue = "250") Double minSalary,
-                                                                             @RequestParam(name = "maxSalary", required = false, defaultValue = "30000") Double maxSalary
+    public ResponseEntity<SingleMessage<CustomerPageList>> findAllDetail(@RequestParam(name = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                                          @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                                          @RequestParam(name = "status", required = false) Integer contractStatus,
+                                                          @RequestParam(name = "minSalary", required = false, defaultValue = "250") Double minSalary,
+                                                          @RequestParam(name = "maxSalary", required = false, defaultValue = "30000") Double maxSalary
     ) {
-        return new ResponseEntity<>(customerInfoService.findAllDetail(pageNumber, pageSize, contractStatus, minSalary, maxSalary), HttpStatus.OK);
+        return ResponseEntity.ok(generateSingleMessage(customerInfoService.findAllDetail(pageNumber, pageSize, contractStatus, minSalary, maxSalary)));
     }
 
     @GetMapping("")
-    public ResponseEntity<List<CustomerInfoResponseDto>> findAll(@RequestParam(name = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-                                                                 @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        return new ResponseEntity<>(customerInfoService.findAllOnlyCustomerInfo(pageNumber, pageSize), HttpStatus.OK);
+    public ResponseEntity<CollectionMessage<CustomerInfoResponseDto>> findAll(@RequestParam(name = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                                                              @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        return  ResponseEntity.ok(generateCollectionMessage(customerInfoService.findAllOnlyCustomerInfo(pageNumber, pageSize)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerInfoDetailResponseDto> update(@PathVariable Long id, @RequestBody CustomerInfoRequestDto customerInfoRequestDto) {
-        return new ResponseEntity<>(customerInfoService.update(id, customerInfoRequestDto), HttpStatus.OK);
+    public ResponseEntity<SingleMessage<CustomerInfoDetailResponseDto>> update(@PathVariable Long id, @RequestBody CustomerInfoRequestDto customerInfoRequestDto) {
+        return  ResponseEntity.ok(generateSingleMessage(customerInfoService.update(id, customerInfoRequestDto)));
     }
 
 }

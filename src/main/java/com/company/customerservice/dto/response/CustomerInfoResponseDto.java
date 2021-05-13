@@ -6,13 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CustomerInfoResponseDto {
+public class CustomerInfoResponseDto implements Serializable {
 
     private Long id;
     @JsonProperty("uniqueId")
@@ -31,8 +32,6 @@ public class CustomerInfoResponseDto {
     private long endDate;
     @JsonProperty("contractStatus")
     private Integer contractStatus;
-    @JsonProperty("securityNumber")
-    private String securityNumber;
     @JsonProperty("createdDate")
     private long createdDate;
 }

@@ -30,8 +30,6 @@ public class CustomerUpdateMapper {
             customerInfoDb.setEndDate(dateMapper.millisToLocalDateTime(customerInfoRequestDto.getEndDate()));
         if (customerInfoRequestDto.getContractStatus() != null)
             customerInfoDb.setContractStatus(customerInfoRequestDto.getContractStatus());
-        if (customerInfoRequestDto.getSecurityNumber() != null)
-            customerInfoDb.setSecurityNumber(customerInfoRequestDto.getSecurityNumber());
         if (customerInfoRequestDto.getPersonalInfo() != null) {
             customerInfoDb.setPersonalInfo(toUpdatePersonal(customerInfoRequestDto.getPersonalInfo(),customerInfoDb.getPersonalInfo()));
         }
