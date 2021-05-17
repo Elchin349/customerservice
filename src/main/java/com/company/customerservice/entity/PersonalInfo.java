@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(schema = "customer",name = "personal_info")
 public class PersonalInfo {
 
     @Id
@@ -40,6 +40,8 @@ public class PersonalInfo {
     private LocalDate expireDate;
     @Column(name = "given_date")
     private LocalDate givenDate;
+    @Column(name = "birth_place")
+    private String birthPlace;
     @Column(name = "registration_address")
     private String registrationAddress;
 

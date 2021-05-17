@@ -1,10 +1,10 @@
 package com.company.customerservice.mappers;
 
-import com.company.customerservice.dto.request.AddressContactInfoRequestDto;
 import com.company.customerservice.dto.request.CustomerInfoRequestDto;
+import com.company.customerservice.dto.request.EmployeeInfoRequestDto;
 import com.company.customerservice.dto.request.PersonalInfoRequestDto;
-import com.company.customerservice.entity.AddressContactInfo;
 import com.company.customerservice.entity.CustomerInfo;
+import com.company.customerservice.entity.EmployeeInfo;
 import com.company.customerservice.entity.PersonalInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,32 +15,29 @@ public class CustomerUpdateMapper {
 
     private final DateMapper dateMapper;
 
-    public CustomerInfo toUpdateCustomer(CustomerInfoRequestDto customerInfoRequestDto,CustomerInfo customerInfoDb) {
-
-        if (customerInfoRequestDto.getWorkPlace() != null)
-            customerInfoDb.setWorkPlace(customerInfoRequestDto.getWorkPlace());
-        if (customerInfoRequestDto.getPosition() != null)
-            customerInfoDb.setPosition(customerInfoRequestDto.getPosition());
-        if (customerInfoRequestDto.getSalary() != null) customerInfoDb.setSalary(customerInfoRequestDto.getSalary());
-        if (customerInfoRequestDto.getContractNumber() != null)
-            customerInfoDb.setContractNumber(customerInfoRequestDto.getContractNumber());
-        if (customerInfoRequestDto.getBeginDate() != null)
-            customerInfoDb.setBeginDate(dateMapper.millisToLocalDateTime(customerInfoRequestDto.getBeginDate()));
-        if (customerInfoRequestDto.getEndDate() != null)
-            customerInfoDb.setEndDate(dateMapper.millisToLocalDateTime(customerInfoRequestDto.getEndDate()));
-        if (customerInfoRequestDto.getContractStatus() != null)
-            customerInfoDb.setContractStatus(customerInfoRequestDto.getContractStatus());
-        if (customerInfoRequestDto.getPersonalInfo() != null) {
-            customerInfoDb.setPersonalInfo(toUpdatePersonal(customerInfoRequestDto.getPersonalInfo(),customerInfoDb.getPersonalInfo()));
+    public CustomerInfo toUpdateCustomer(CustomerInfoRequestDto customerInfoRequestDto, CustomerInfo customerInfoDb) {
+        if(customerInfoRequestDto.getEmployee() != null){
+            customerInfoDb.setEmployeeInfo(toUpdateEmployee(customerInfoRequestDto.getEmployee(),customerInfoDb.getEmployeeInfo()));
         }
-        if (customerInfoRequestDto.getAddressContactInfo() != null) {
-            customerInfoDb.setAddressContactInfo(toUpdateAddressContactInfo(customerInfoRequestDto.getAddressContactInfo(),customerInfoDb.getAddressContactInfo()));
+        if(customerInfoRequestDto.getPersonal() != null){
+            customerInfoDb.setPersonalInfo(toUpdatePersonal(customerInfoRequestDto.getPersonal(),customerInfoDb.getPersonalInfo()));
         }
 
         return customerInfoDb;
     }
 
-    private PersonalInfo toUpdatePersonal(PersonalInfoRequestDto personalInfoRequestDto,PersonalInfo personalInfoDb) {
+    private EmployeeInfo toUpdateEmployee(EmployeeInfoRequestDto employeeInfoRequestDto, EmployeeInfo employeeInfo) {
+        if (employeeInfoRequestDto.getWorkPlace() != null) employeeInfo.setWorkPlace(employeeInfoRequestDto.getWorkPlace());
+        if (employeeInfoRequestDto.getPosition() != null) employeeInfo.setPosition(employeeInfoRequestDto.getPosition());
+        if (employeeInfoRequestDto.getSalary() != null) employeeInfo.setSalary(employeeInfoRequestDto.getSalary());
+        if (employeeInfoRequestDto.getWorkPhone() != null) employeeInfo.setWorkPhone(employeeInfoRequestDto.getWorkPhone());
+        if (employeeInfoRequestDto.getPhone() != null) employeeInfo.setPhone(employeeInfoRequestDto.getPhone());
+        if (employeeInfoRequestDto.getCurrentAddress() != null) employeeInfo.setCurrentAddress(employeeInfoRequestDto.getCurrentAddress());
+        return employeeInfo;
+    }
+
+
+    private PersonalInfo toUpdatePersonal(PersonalInfoRequestDto personalInfoRequestDto, PersonalInfo personalInfoDb) {
 
         if (personalInfoRequestDto.getFirstName() != null)
             personalInfoDb.setFirstName(personalInfoRequestDto.getFirstName());
@@ -50,7 +47,8 @@ public class CustomerUpdateMapper {
             personalInfoDb.setPatronymic(personalInfoRequestDto.getPatronymic());
         if (personalInfoRequestDto.getBirthDate() != null)
             personalInfoDb.setBirthDate(dateMapper.millisToLocalDate(personalInfoRequestDto.getBirthDate()));
-        if (personalInfoRequestDto.getFinCode() != null) personalInfoDb.setFinCode(personalInfoRequestDto.getFinCode());
+        if (personalInfoRequestDto.getFinCode() != null)
+            personalInfoDb.setFinCode(personalInfoRequestDto.getFinCode());
         if (personalInfoRequestDto.getDocNumber() != null)
             personalInfoDb.setDocNumber(personalInfoRequestDto.getDocNumber());
         if (personalInfoRequestDto.getDocSerial() != null)
@@ -65,19 +63,6 @@ public class CustomerUpdateMapper {
             personalInfoDb.setRegistrationAddress(personalInfoRequestDto.getRegistrationAddress());
 
         return personalInfoDb;
-    }
-
-    private AddressContactInfo toUpdateAddressContactInfo(AddressContactInfoRequestDto requestDto,AddressContactInfo contactInfoDb) {
-        if (requestDto.getCurrentAddress() != null) contactInfoDb.setCurrentAddress(requestDto.getCurrentAddress());
-        if (requestDto.getPhone1() != null) contactInfoDb.setPhone1(requestDto.getPhone1());
-        if (requestDto.getPhone2() != null) contactInfoDb.setPhone2(requestDto.getPhone2());
-        if (requestDto.getCountry() != null) contactInfoDb.setCountry(requestDto.getCountry());
-        if (requestDto.getCity() != null) contactInfoDb.setCity(requestDto.getCity());
-        if (requestDto.getDistrict() != null) contactInfoDb.setDistrict(requestDto.getDistrict());
-        if (requestDto.getStreet() != null) contactInfoDb.setStreet(requestDto.getStreet());
-        if (requestDto.getEmail() != null) contactInfoDb.setEmail(requestDto.getEmail());
-
-        return contactInfoDb;
     }
 
 

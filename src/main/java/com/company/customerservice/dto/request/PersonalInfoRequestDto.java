@@ -31,6 +31,8 @@ public class PersonalInfoRequestDto {
     private Integer docNumber;
     @JsonProperty("martialStatus")
     private String martialStatus;
+    @JsonProperty("birth_place")
+    private String birthPlace;
     @JsonProperty("expireDate")
     private Long expireDate;
     @JsonProperty("givenDate")

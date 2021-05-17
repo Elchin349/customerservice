@@ -15,23 +15,9 @@ public class CustomerInfoRequestDto {
 
     @JsonIgnore
     private Long id;
-    @JsonProperty("workPlace")
-    private String workPlace;
-    @JsonProperty("position")
-    private String position;
-    @JsonProperty("salary")
-    private Double salary;
-    @JsonProperty("contractNumber")
-    private String contractNumber;
-    @JsonProperty("beginDate")
-    private Long beginDate;
-    @JsonProperty("endDate")
-    private Long endDate;
-    @JsonProperty("contractStatus")
-    private Integer contractStatus;
+    @JsonProperty("employee")
+    private EmployeeInfoRequestDto employee;
+    @JsonProperty("personal")
+    private PersonalInfoRequestDto personal;
 
-    @JsonProperty("personalInfo")
-    private PersonalInfoRequestDto personalInfo;
-    @JsonProperty("addressContactInfo")
-    private AddressContactInfoRequestDto addressContactInfo;
 }

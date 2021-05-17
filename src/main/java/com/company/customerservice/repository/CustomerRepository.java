@@ -12,8 +12,9 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerInfo,Long> {
-
-    Page<CustomerInfo> findAllBySalaryGreaterThanEqualAndSalaryLessThanEqual(Pageable pageable,Double minSalary,Double maxSalary);
-
-    Page<CustomerInfo>findAllByContractStatusAndSalaryGreaterThanEqualAndSalaryLessThanEqual(Integer status,Pageable pageable,Double minSalary,Double maxSalary);
+//
+//    Page<CustomerInfo> findAllBySalaryGreaterThanEqualAndSalaryLessThanEqual(Pageable pageable,Double minSalary,Double maxSalary);
+      Page<CustomerInfo> findAllByEmployeeInfoSalaryGreaterThanEqualAndEmployeeInfoSalaryLessThanEqual(Pageable pageable,Double minSalary,Double maxSalary);
+//
+//    Page<CustomerInfo>findAllByContractStatusAndSalaryGreaterThanEqualAndSalaryLessThanEqual(Integer status,Pageable pageable,Double minSalary,Double maxSalary);
 }

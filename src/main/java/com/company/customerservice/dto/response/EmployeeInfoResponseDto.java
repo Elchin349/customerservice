@@ -6,15 +6,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CustomerInfoDetailResponseDto implements Serializable {
+public class EmployeeInfoResponseDto {
 
+    @JsonProperty("id")
     private Long id;
     @JsonProperty("uniqueId")
     private UUID uniqueId;
@@ -24,18 +25,14 @@ public class CustomerInfoDetailResponseDto implements Serializable {
     private String position;
     @JsonProperty("salary")
     private Double salary;
-    @JsonProperty("contractNumber")
-    private String contractNumber;
-    @JsonProperty("beginDate")
-    private long beginDate;
-    @JsonProperty("endDate")
-    private long endDate;
-    @JsonProperty("contractStatus")
-    private Integer contractStatus;
     @JsonProperty("createdDate")
-    private long createdDate;
-    @JsonProperty("addressContactInfo")
-    private AddressContactInfoResponseDto addressContactInfo;
-    @JsonProperty("personalInfo")
-    private PersonalInfoResponseDto personalInfo;
+    private LocalDateTime createdDate;
+    @JsonProperty("updatedDate")
+    private LocalDateTime updatedDate;
+    @JsonProperty("workPlace")
+    private String workPhone;
+    @JsonProperty("phone")
+    private String phone;
+    @JsonProperty("currentAddress")
+    private String currentAddress;
 }

@@ -15,23 +15,10 @@ import java.util.UUID;
 @Builder
 public class CustomerInfoResponseDto implements Serializable {
 
+    @JsonProperty("id")
     private Long id;
-    @JsonProperty("uniqueId")
-    private UUID uniqueId;
-    @JsonProperty("workPlace")
-    private String workPlace;
-    @JsonProperty("position")
-    private String position;
-    @JsonProperty("salary")
-    private Double salary;
-    @JsonProperty("contractNumber")
-    private String contractNumber;
-    @JsonProperty("beginDate")
-    private long beginDate;
-    @JsonProperty("endDate")
-    private long endDate;
-    @JsonProperty("contractStatus")
-    private Integer contractStatus;
-    @JsonProperty("createdDate")
-    private long createdDate;
+    @JsonProperty("employee")
+    private EmployeeInfoResponseDto employee;
+    @JsonProperty("personal")
+    private PersonalInfoResponseDto personal;
 }

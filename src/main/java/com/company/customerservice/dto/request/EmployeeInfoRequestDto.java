@@ -7,29 +7,34 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddressContactInfoRequestDto {
+public class EmployeeInfoRequestDto {
 
     @JsonIgnore
     private Long id;
+
+    @JsonProperty("workPlace")
+    private String workPlace;
+
+    @JsonProperty("position")
+    private String position;
+
+    @JsonProperty("salary")
+    private Double salary;
+
+    @JsonProperty("workPlace")
+    private String workPhone;
+
+    @JsonProperty("phone")
+    private String phone;
+
     @JsonProperty("currentAddress")
     private String currentAddress;
-    @JsonProperty("phone1")
-    private String phone1;
-    @JsonProperty("phone2")
-    private String phone2;
-    @JsonProperty("country")
-    private String country;
-    @JsonProperty("city")
-    private String city;
-    @JsonProperty("district")
-    private String district;
-    @JsonProperty("street")
-    private String street;
-    @JsonProperty("email")
-    private String email;
 }
