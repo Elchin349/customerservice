@@ -29,7 +29,7 @@ public class EmployeeInfoRequestDto {
     @JsonProperty("salary")
     private Double salary;
 
-    @JsonProperty("workPlace")
+    @JsonProperty("workPhone")
     private String workPhone;
 
     @JsonProperty("phone")

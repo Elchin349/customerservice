@@ -16,11 +16,11 @@ public class CustomerUpdateMapper {
     private final DateMapper dateMapper;
 
     public CustomerInfo toUpdateCustomer(CustomerInfoRequestDto customerInfoRequestDto, CustomerInfo customerInfoDb) {
-        if(customerInfoRequestDto.getEmployee() != null){
-            customerInfoDb.setEmployeeInfo(toUpdateEmployee(customerInfoRequestDto.getEmployee(),customerInfoDb.getEmployeeInfo()));
+        if(customerInfoRequestDto.getEmployeeInfo() != null){
+            customerInfoDb.setEmployeeInfo(toUpdateEmployee(customerInfoRequestDto.getEmployeeInfo(),customerInfoDb.getEmployeeInfo()));
         }
-        if(customerInfoRequestDto.getPersonal() != null){
-            customerInfoDb.setPersonalInfo(toUpdatePersonal(customerInfoRequestDto.getPersonal(),customerInfoDb.getPersonalInfo()));
+        if(customerInfoRequestDto.getPersonalInfo() != null){
+            customerInfoDb.setPersonalInfo(toUpdatePersonal(customerInfoRequestDto.getPersonalInfo(),customerInfoDb.getPersonalInfo()));
         }
 
         return customerInfoDb;

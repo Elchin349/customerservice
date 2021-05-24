@@ -42,6 +42,9 @@ public class EmployeeInfo {
     @Column(name = "current_address")
     private String currentAddress;
 
+    @OneToOne(mappedBy = "employeeInfo",orphanRemoval = true)
+    private PersonalInfo personalInfo;
+
     @PrePersist
     private void createDateNow(){
         this.createdDate = LocalDateTime.now();

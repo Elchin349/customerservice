@@ -29,7 +29,7 @@ public class EmployeeInfoResponseDto {
     private LocalDateTime createdDate;
     @JsonProperty("updatedDate")
     private LocalDateTime updatedDate;
-    @JsonProperty("workPlace")
+    @JsonProperty("workPhone")
     private String workPhone;
     @JsonProperty("phone")
     private String phone;

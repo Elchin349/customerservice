@@ -15,9 +15,11 @@ public class CustomerInfoRequestDto {
 
     @JsonIgnore
     private Long id;
+    @JsonProperty("status")
+    private Integer status;
     @JsonProperty("employee")
-    private EmployeeInfoRequestDto employee;
+    private EmployeeInfoRequestDto employeeInfo;
     @JsonProperty("personal")
-    private PersonalInfoRequestDto personal;
+    private PersonalInfoRequestDto personalInfo;
 
 }

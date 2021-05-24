@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(schema = "customer",name = "personal_info")
+@Table(schema = "customer", name = "personal_info")
 public class PersonalInfo {
 
     @Id
@@ -44,5 +44,8 @@ public class PersonalInfo {
     private String birthPlace;
     @Column(name = "registration_address")
     private String registrationAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_info_id", referencedColumnName = "id")
+    private EmployeeInfo employeeInfo;
 
 }

@@ -17,8 +17,12 @@ public class CustomerInfoResponseDto implements Serializable {
 
     @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("status")
+    private Integer status;
+
     @JsonProperty("employee")
-    private EmployeeInfoResponseDto employee;
+    private EmployeeInfoResponseDto employeeInfo;
     @JsonProperty("personal")
-    private PersonalInfoResponseDto personal;
+    private PersonalInfoResponseDto personalInfo;
 }

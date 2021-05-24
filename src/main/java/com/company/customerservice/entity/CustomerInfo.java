@@ -29,6 +29,8 @@ public class CustomerInfo {
     @Column(name = "status")
     private Integer status;
 
+    private LocalDateTime createdDate;
+
     @OneToOne(cascade =CascadeType.ALL)
     @JoinColumn(name = "customer_personal_id",referencedColumnName = "id",
     foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT,name = "customer_personal_fk"))
@@ -39,4 +41,9 @@ public class CustomerInfo {
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT,name = "customer_employee_fk"))
     private EmployeeInfo employeeInfo;
 
+
+    @PrePersist
+    public void createdAt(){
+        this.createdDate = LocalDateTime.now();
+    }
 }
